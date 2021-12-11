@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
+import 'change_notifier/change_notifier_page.dart';
+import 'change_notifier/provider_controller.dart';
 import 'provider/provider_page.dart';
 import 'provider/user_model.dart';
 
@@ -14,14 +16,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (_) {
-        return UserModel(
-          name: 'Felipe Sales',
-          imgAvatar: 'assets/i.png',
-          birthDate: '26/12/2003',
-        );
-      },
+    return MultiProvider(
+      providers: [
+        Provider(
+          create: (_) => UserModel(
+            name: 'Felipe Sales',
+            imgAvatar: 'assets/i.png',
+            birthDate: '26/12/2003',
+          ),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProviderController(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Provider Package',
         theme: ThemeData(
@@ -29,6 +36,7 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/provider': (context) => const ProviderPage(),
+          '/change-notifier': (context) => const ChangeNotifierPage(),
         },
         home: Builder(builder: (context) {
           return Scaffold(
@@ -46,7 +54,9 @@ class MyApp extends StatelessWidget {
                     child: const Text('Provider'),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/change-notifier');
+                    },
                     child: const Text('Change Notifier'),
                   ),
                 ],
