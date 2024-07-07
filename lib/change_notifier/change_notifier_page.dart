@@ -1,12 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
 import 'provider_controller.dart';
 
 class ChangeNotifierPage extends StatefulWidget {
-  const ChangeNotifierPage({Key? key}) : super(key: key);
+  const ChangeNotifierPage({super.key});
 
   @override
   State<ChangeNotifierPage> createState() => _ChangeNotifierPageState();
@@ -16,10 +14,7 @@ class _ChangeNotifierPageState extends State<ChangeNotifierPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) async {
-      await Future.delayed(
-        const Duration(seconds: 1),
-      );
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       context.read<ProviderController>().changeData();
     });
   }

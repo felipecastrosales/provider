@@ -7,7 +7,7 @@ import 'product_widget.dart';
 import 'user_model.dart';
 
 class ProviderPage extends StatelessWidget {
-  const ProviderPage({Key? key}) : super(key: key);
+  const ProviderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
